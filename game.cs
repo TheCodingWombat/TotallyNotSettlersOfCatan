@@ -30,10 +30,8 @@ class Game
 
             //GL.LoadMatrix(ref M);
             //GL.Translate(0, 0, -1);
-            GL.Rotate(tick++, 0, 0, 1);
+            //GL.Rotate(tick++, 0, 0, 1);
             //GL.Rotate(0 % 360, 1, 1, 1);
-
-            float aspectRatio = (float)screen.width / (float)screen.height;
 
             GL.Color3(1.0f, 1.0f, 1.0f);
             GL.Begin(PrimitiveType.Triangles);
