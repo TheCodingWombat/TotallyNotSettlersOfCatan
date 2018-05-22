@@ -22,13 +22,15 @@ class Game
             screen.Line(2, 20, 160, 20, 0xff0000);
         }
 
+        int tick = 0;
+
         public void RenderGL() {
 
             //var M = Matrix4.CreatePerspectiveFieldOfView(1.6f, 1.3f, .1f, 1000);
 
             //GL.LoadMatrix(ref M);
             //GL.Translate(0, 0, -1);
-            GL.Rotate(90, 0, 0, 1);
+            GL.Rotate(tick++, 0, 0, 1);
             //GL.Rotate(0 % 360, 1, 1, 1);
 
             float aspectRatio = (float)screen.width / (float)screen.height;
