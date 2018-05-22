@@ -16,7 +16,7 @@ class Game
 	    {
 
 		    screen.Clear( 0 );
-		    screen.Print( "hello world", 2, 2, 0xffffff );
+		    screen.Print( "hello World", 2, 2, 0xffffff );
             screen.Line(2, 20, 160, 20, 0xff0000);
 
             screen.Line(25, (int)Math.Floor(50 * Math.Sqrt(3) / 2), 75, (int) Math.Floor(50 * Math.Sqrt(3) / 2), 0xff0000);
