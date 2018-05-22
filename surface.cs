@@ -5,8 +5,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
  
-namespace Template
-{
+namespace TotallyNotSettlersOfCatan {
 	public class Sprite
 	{
 		Surface bitmap;

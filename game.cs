@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Template {
+namespace TotallyNotSettlersOfCatan {
 
 class Game
 {

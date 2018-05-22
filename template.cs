@@ -6,8 +6,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 
-namespace Template
-{
+namespace TotallyNotSettlersOfCatan {
 	public class OpenTKApp : GameWindow
 	{
 		static int screenID;
