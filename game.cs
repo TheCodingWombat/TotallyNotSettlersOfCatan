@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using OpenTK;
+using OpenTK.Graphics.OpenGL;
 
 namespace TotallyNotSettlersOfCatan {
 
@@ -18,13 +20,25 @@ class Game
 		    screen.Clear( 0 );
 		    screen.Print( "hello World", 2, 2, 0xffffff );
             screen.Line(2, 20, 160, 20, 0xff0000);
+        }
 
-            screen.Line(25, (int)Math.Floor(50 * Math.Sqrt(3) / 2), 75, (int) Math.Floor(50 * Math.Sqrt(3) / 2), 0xff0000);
-            screen.Line(75, (int)Math.Floor(50 * Math.Sqrt(3) / 2), 100, (int)Math.Floor(100 * Math.Sqrt(3) / 2), 0xff0000);
-            screen.Line(100, (int)Math.Floor(100 * Math.Sqrt(3) / 2), 75, (int)Math.Floor(150 * Math.Sqrt(3) / 2), 0xff0000);
-            screen.Line(75, (int)Math.Floor(150 * Math.Sqrt(3) / 2), 25, (int)Math.Floor(150 * Math.Sqrt(3) / 2), 0xff0000);
-            screen.Line(25, (int)Math.Floor(150 * Math.Sqrt(3) / 2), 0, (int)Math.Floor(100 * Math.Sqrt(3) / 2), 0xff0000);
-            screen.Line(0, (int)Math.Floor(100 * Math.Sqrt(3) / 2), 25, (int)Math.Floor(50 * Math.Sqrt(3) / 2), 0xff0000);
+        int tick = 0;
+
+        public void RenderGL() {
+
+            //var M = Matrix4.CreatePerspectiveFieldOfView(1.6f, 1.3f, .1f, 1000);
+
+            //GL.LoadMatrix(ref M);
+            //GL.Translate(0, 0, -1);
+            //GL.Rotate(tick++, 0, 0, 1);
+            //GL.Rotate(0 % 360, 1, 1, 1);
+
+            GL.Color3(1.0f, 1.0f, 1.0f);
+            GL.Begin(PrimitiveType.Triangles);
+            GL.Vertex2(-0.5f, -0.5f * screen.aspectRatio);
+            GL.Vertex2(0.5f, -0.5f * screen.aspectRatio);
+            GL.Vertex2(-0.5f, 0.5f * screen.aspectRatio);
+            GL.End();
         }
     }
 

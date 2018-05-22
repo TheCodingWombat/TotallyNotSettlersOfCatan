@@ -39,6 +39,7 @@ namespace TotallyNotSettlersOfCatan {
 	public class Surface
 	{
 		public int width, height;
+        public float aspectRatio;
 		public int [] pixels;
 		static bool fontReady = false;
 		static Surface font;
@@ -48,6 +49,7 @@ namespace TotallyNotSettlersOfCatan {
 		{
 			width = w;
 			height = h;
+            aspectRatio = (float)width / (float)height;
 			pixels = new int[w * h];
 		}
         // surface constructor using a file
@@ -56,7 +58,8 @@ namespace TotallyNotSettlersOfCatan {
  			Bitmap bmp = new Bitmap( fileName );
 			width = bmp.Width;
 			height = bmp.Height;
-			pixels = new int[width * height];
+            aspectRatio = (float)width / (float)height;
+            pixels = new int[width * height];
 			BitmapData data = bmp.LockBits( new Rectangle( 0, 0, width, height ), ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb );
 			IntPtr ptr = data.Scan0;
 			System.Runtime.InteropServices.Marshal.Copy( data.Scan0, pixels, 0, width * height );
