@@ -7,3 +7,13 @@ C:\Users\richa\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\Totally Not Sett
 C:\Users\richa\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\Totally Not Settlers Of Catan.csproj.CoreCompileInputs.cache
 C:\Users\richa\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\TotallyNotSettlersOfCatan.exe
 C:\Users\richa\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\TotallyNotSettlersOfCatan.pdb
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\bin\Debug\TotallyNotSettlersOfCatan.exe.config
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\bin\Debug\TotallyNotSettlersOfCatan.exe
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\bin\Debug\TotallyNotSettlersOfCatan.pdb
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\bin\Debug\OpenTK.dll
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\bin\Debug\OpenTK.dll.config
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\Totally Not Settlers Of Catan.csprojAssemblyReference.cache
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\Totally Not Settlers Of Catan.csproj.CoreCompileInputs.cache
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\Totally Not Settlers Of Catan.csproj.CopyComplete
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\TotallyNotSettlersOfCatan.exe
+C:\Users\Fedde Fuld\Source\Repos\TotallyNotSettlersOfCatan\obj\Debug\TotallyNotSettlersOfCatan.pdb

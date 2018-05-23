@@ -18,7 +18,7 @@ namespace TotallyNotSettlersOfCatan {
 	    {
 
 		    screen.Clear( 0 );
-		    screen.Print( "hello world", 2, 2, 0xffffff );
+		    screen.Print( "hello World", 2, 2, 0xffffff );
             screen.Line(2, 20, 160, 20, 0xff0000);
         }
 
@@ -68,3 +68,8 @@ namespace TotallyNotSettlersOfCatan {
     }
 
 } // namespace Template
+
+
+//i'm just passing by, fedde is figuring out github
+
+
