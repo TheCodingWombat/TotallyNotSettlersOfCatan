@@ -36,8 +36,7 @@ namespace TotallyNotSettlersOfCatan {
 			GL.Viewport(0, 0, Width, Height);
 			GL.MatrixMode( MatrixMode.Projection );
 			GL.LoadIdentity();
-            //GL.Ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 4.0f);
-            GL.Ortho(-1.0, 1.0, (float)Height / Width * -1.0f, (float)Height / Width * 1.0f, 0.0, 4.0);
+            GL.Ortho(-1.0 * 5, 1.0 * 5, (float)Height / Width * -1.0f * 5, (float)Height / Width * 1.0f * 5, 0.0, 4.0);
         }
 		protected override void OnUpdateFrame( FrameEventArgs e )
 		{

@@ -44,7 +44,6 @@ namespace TotallyNotSettlersOfCatan {
         }
 
         private void DrawHexagon(Vector2 p, float r, Vector3 c) {
-            Vector2[] corners = new Vector2[6];
 
             GL.Color3(c);
 
@@ -55,14 +54,6 @@ namespace TotallyNotSettlersOfCatan {
             }
 
             GL.End();
-            
-            
-
-            for (int j = 0; j < corners.Length; j++) {
-
-                
-
-            }
         }
 
     }
