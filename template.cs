@@ -36,10 +36,9 @@ namespace TotallyNotSettlersOfCatan {
 			GL.Viewport(0, 0, Width, Height);
 			GL.MatrixMode( MatrixMode.Projection );
 			GL.LoadIdentity();
-			GL.Ortho( -1.0, 1.0, -1.0, 1.0, 0.0, 4.0 );
-
-            game.screen.aspectRatio = (float) Width / (float) Height;
-		}
+            //GL.Ortho(-1.0f, 1.0f, -1.0f, 1.0f, 0.0f, 4.0f);
+            GL.Ortho(-1.0, 1.0, (float)Height / Width * -1.0f, (float)Height / Width * 1.0f, 0.0, 4.0);
+        }
 		protected override void OnUpdateFrame( FrameEventArgs e )
 		{
 			// called once per frame; app logic
@@ -73,8 +72,14 @@ namespace TotallyNotSettlersOfCatan {
 			// setup camera
 			GL.MatrixMode( MatrixMode.Modelview );
 			GL.LoadIdentity();
-			GL.MatrixMode( MatrixMode.Projection );
-			GL.LoadIdentity();
+
+
+            //Disabled this since we want to use ortho
+
+			//GL.MatrixMode( MatrixMode.Projection );
+			//GL.LoadIdentity();
+
+
 			// draw screen filling quad
 			GL.Begin( PrimitiveType.Quads );
 			GL.TexCoord2( 0.0f, 1.0f ); GL.Vertex2( -1.0f, -1.0f );
@@ -88,7 +93,7 @@ namespace TotallyNotSettlersOfCatan {
             GL.Enable(EnableCap.DepthTest);
             GL.Disable(EnableCap.Texture2D);
             GL.Clear(ClearBufferMask.DepthBufferBit);
-
+            
             game.RenderGL();
 
 			SwapBuffers();
