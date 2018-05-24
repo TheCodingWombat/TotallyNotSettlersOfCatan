@@ -12,6 +12,7 @@ namespace TotallyNotSettlersOfCatan {
 		static int screenID;
 		static Game game;
 		static bool terminated = false;
+        static float zoom = 15;
 		protected override void OnLoad( EventArgs e )
 		{
 			// called upon app init
@@ -36,7 +37,7 @@ namespace TotallyNotSettlersOfCatan {
 			GL.Viewport(0, 0, Width, Height);
 			GL.MatrixMode( MatrixMode.Projection );
 			GL.LoadIdentity();
-            GL.Ortho(-1.0 * 5, 1.0 * 5, (float)Height / Width * -1.0f * 5, (float)Height / Width * 1.0f * 5, 0.0, 4.0);
+            GL.Ortho(-1.0 * zoom, 1.0 * zoom, (float)Height / Width * -1.0f * zoom, (float)Height / Width * 1.0f * zoom, 0.0, 4.0);
         }
 		protected override void OnUpdateFrame( FrameEventArgs e )
 		{
