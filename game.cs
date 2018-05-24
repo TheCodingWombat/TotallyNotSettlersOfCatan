@@ -22,11 +22,11 @@ namespace TotallyNotSettlersOfCatan {
 
         private void CreateTiles() {
 
-            tiles = new Tile[100];
+            tiles = new Tile[1000*1000];
 
-            for (int y = 0; y < 10; y++) {
-                for (int x = 0; x < 10; x++) {
-                    tiles[x + y * 10] = new Tile(x, y, RandomColor());
+            for (int y = 0; y < 1000; y++) {
+                for (int x = 0; x < 1000; x++) {
+                    tiles[x + y * 1000] = new Tile(x - 500, y - 500, RandomColor());
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace TotallyNotSettlersOfCatan {
 		static int screenID;
 		static Game game;
 		static bool terminated = false;
-        static float zoom = 15;
+        static float zoom = 200;
 		protected override void OnLoad( EventArgs e )
 		{
 			// called upon app init
