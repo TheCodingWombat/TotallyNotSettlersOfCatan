@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Corner.cs" />
     <Compile Include="game.cs" />
+    <Compile Include="GameBoard.cs" />
     <Compile Include="Side.cs" />
     <Compile Include="surface.cs" />
     <Compile Include="template.cs" />
