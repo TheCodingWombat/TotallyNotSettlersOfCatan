@@ -1,6 +1,7 @@
 ﻿using OpenTK;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,8 +19,19 @@ namespace TotallyNotSettlersOfCatan {
             random = new Random();
 
             CreateTiles();
+        }
 
-            Console.WriteLine(tiles.Count);
+        public void CheckTileHover(PointF point) {
+            foreach (Tile tile in tiles) {
+                tile.OnHover(tile.ContainsPoint(point));
+            }
+        }
+
+        public void CheckTileClick(PointF point) {
+            foreach (Tile tile in tiles) {
+                if (tile.ContainsPoint(point))
+                    tile.OnClick();
+            }
         }
 
         private void CreateTiles() {

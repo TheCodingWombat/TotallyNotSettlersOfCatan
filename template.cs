@@ -12,20 +12,45 @@ namespace TotallyNotSettlersOfCatan {
 		static int screenID;
 		static Game game;
 		static bool terminated = false;
-        static float zoom = 16;
-		protected override void OnLoad( EventArgs e )
+        static float zoom = 1;
+
+        public static float Zoom { get => zoom; set => zoom = value; }
+
+        protected override void OnLoad( EventArgs e )
 		{
 			// called upon app init
 			
 			GL.Hint( HintTarget.PerspectiveCorrectionHint, HintMode.Nicest );
-			ClientSize = new Size( 640, 400 );
-			game = new Game();
+            
+			ClientSize = new Size( 1280, 800 );
+            Location = new Point(200, 100);
+			game = new Game(this);
 			game.screen = new Surface( Width, Height );
 			Sprite.target = game.screen;
 			screenID = game.screen.GenTexture();
 			game.Init();
+
+            MouseMove += Mouse_Move;
+            MouseDown += Mouse_Down;
+
 		}
-		protected override void OnUnload( EventArgs e )
+
+        public PointF ScreenToGameCoords (Point p) {
+            float x = (p.X - ClientSize.Width / 2f) / (ClientSize.Width / (2f * zoom));
+            float y = -(p.Y - ClientSize.Height / 2f) / (ClientSize.Width / (2f * zoom));
+
+            return new PointF(x, y);
+        }
+
+        public void Mouse_Move(object sender, MouseMoveEventArgs e) {
+            game.Mouse_Move(ScreenToGameCoords(e.Position));
+        }
+
+        public void Mouse_Down(object sender, MouseButtonEventArgs e) {
+            game.Mouse_Down(ScreenToGameCoords(e.Position), e.Button);
+        }
+
+        protected override void OnUnload( EventArgs e )
 		{
 			// called upon app close
 			GL.DeleteTextures( 1, ref screenID );
@@ -37,7 +62,7 @@ namespace TotallyNotSettlersOfCatan {
 			GL.Viewport(0, 0, Width, Height);
 			GL.MatrixMode( MatrixMode.Projection );
 			GL.LoadIdentity();
-            GL.Ortho(-1.0 * zoom, 1.0 * zoom, (float)Height / Width * -1.0f * zoom, (float)Height / Width * 1.0f * zoom, 0.0, 4.0);
+            GL.Ortho(-1.0 * Zoom, 1.0 * Zoom, (float)Height / Width * -1.0f * Zoom, (float)Height / Width * 1.0f * Zoom, 0.0, 4.0);
         }
 		protected override void OnUpdateFrame( FrameEventArgs e )
 		{

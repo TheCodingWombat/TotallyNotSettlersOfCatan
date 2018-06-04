@@ -1,5 +1,8 @@
-﻿using OpenTK;
+﻿using System;
+using System.Drawing;
+using OpenTK;
 using OpenTK.Graphics.OpenGL;
+using OpenTK.Input;
 
 namespace TotallyNotSettlersOfCatan {
 
@@ -8,16 +11,39 @@ namespace TotallyNotSettlersOfCatan {
 	    // member variables
 	    public Surface screen;
         private GameBoard gameBoard;
+        private int boardSize = 3;
+        private OpenTKApp app;
+
+        public Game(OpenTKApp app) {
+            this.app = app;
+        }
 
 	    // initialize
 	    public void Init()
 	    {
-
-            gameBoard = new GameBoard(12);
+            DetermineZoom();
+            gameBoard = new GameBoard(boardSize);
 
         }
 
-        
+        public void Mouse_Move(PointF point) {
+            gameBoard.CheckTileHover(point);
+        }
+
+        public void Mouse_Down(PointF point, MouseButton button) {
+            
+            if (button == MouseButton.Left) {
+                
+                gameBoard.CheckTileClick(point);
+            }
+        }
+
+        private void DetermineZoom() {
+            float tilesInARow = boardSize * 2 + 1;
+
+            OpenTKApp.Zoom = tilesInARow * Tile.ShortRadius * 1.6f; //De 1.6f moet worden vervangen door aspect ratio
+            
+        }        
 
 	    // tick: renders one frame
 	    public void Tick()
