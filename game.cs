@@ -11,7 +11,8 @@ namespace TotallyNotSettlersOfCatan {
 	    // member variables
 	    public Surface screen;
         private GameBoard gameBoard;
-        private int boardSize = 3;
+        private int boardSize = 1;
+        public static float tileRadius = 0.5f;
         private OpenTKApp app;
 
         public Game(OpenTKApp app) {
@@ -53,36 +54,6 @@ namespace TotallyNotSettlersOfCatan {
         //Render OpenGL stuff
         public void RenderGL() {
             gameBoard.Draw();
-
-            DrawAxes();
-        }
-
-        private void DrawAxes() {
-            GL.Color3(new Vector3(0.1f, 0.1f, 0.1f));
-            GL.Begin(PrimitiveType.Lines);
-
-            GL.Vertex2(-1, 0);
-            GL.Vertex2(1, 0);
-
-            GL.End();
-
-            GL.Begin(PrimitiveType.Lines);
-
-            GL.Vertex2(0, -1);
-            GL.Vertex2(0, 1);
-
-            GL.End();
-
-            GL.Color3(1f, 0f, 0f);
-
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.Vertex2(0, 0);
-            GL.Vertex2(0, .4f);
-            GL.Vertex2(.2f, .4f);
-            GL.Vertex2(.2f, 0);
-
-            GL.End();
         }
 
     }

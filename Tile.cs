@@ -9,32 +9,31 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TotallyNotSettlersOfCatan {
-    class Tile {
+    class Tile : IDrawable{
 
         //Use GraphicsPath for clicking
 
-        private int x;
-        private int y;
-        private int cubeX;
-        private int cubeY;
-        private int cubeZ;
-        private static float radius = .5f;
+        private int u;
+        private int v;
         private Vector2 p;
         private int type;
         private Vector2[] vertices = new Vector2[6];
         private Vector3 color;
         private bool hovered = false, clicked = false;
 
-        public static float Radius { get => radius; set => radius = value; }
-        public static float ShortRadius { get => radius * (float) (Math.Sqrt(3) / 2f) ; }
+        public static float Radius { get => Game.tileRadius; }
+        public static float ShortRadius { get => Game.tileRadius * (float) (Math.Sqrt(3) / 2f) ; }
+        public Vector2 P { get => p; set => p = value; }
+        public int U { get => u; set => u = value; }
+        public int V { get => v; set => v = value; }
+        public int Type { get => type; set => type = value; }
 
-        public Tile(int x, int y, int cubeX, int cubeY, int cubeZ, int type) {
-            this.x = x;
-            this.y = y;
-            this.cubeX = cubeX;
-            this.cubeY = cubeY;
-            this.cubeZ = cubeZ;
-            this.type = type;
+        //TODO: Fix coordinate system so it is the same as at https://www.redblobgames.com/grids/hexagons/
+
+        public Tile(int x, int y, int type) {
+            this.U = x;
+            this.V = y;
+            this.Type = type;
 
             color = GetColor();
 
@@ -56,20 +55,22 @@ namespace TotallyNotSettlersOfCatan {
 
         private void CalculateVertices() {
             for (int i = 0; i < vertices.Length; i++)
-                vertices[i] = new Vector2(p.X + Radius * (float)Math.Cos(i * MathHelper.PiOver3), p.Y + Radius * (float)Math.Sin(i * MathHelper.PiOver3));
+                vertices[i] = new Vector2(P.X + Radius * (float)Math.Cos(i * MathHelper.PiOver3), P.Y + Radius * (float)Math.Sin(i * MathHelper.PiOver3));
         }
 
         private void TranslateToScreenPos() {
-            p.X = x * Radius * 1.5f;
-            p.Y = y * Radius * (float)Math.Sqrt(3);
+            p.X = U * Radius * 1.5f;
+            p.Y = V * Radius * (float)Math.Sqrt(3);
 
-            if ((x&1) == 1)
+            if ((U&1) == 1)
                 p.Y -= Radius * (float)Math.Sqrt(3) / 2;
         }
 
         private Vector3 GetColor() {
 
-            switch (type) {
+            switch (Type) {
+                case -1: //null
+                    return new Vector3(1, 1, 1);
                 case 0: //Water
                     return new Vector3(0, 0, 1);
                 case 1: //Wheat
@@ -101,7 +102,7 @@ namespace TotallyNotSettlersOfCatan {
                 GL.Begin(PrimitiveType.Polygon);
 
                 for (int i = 0; i < 16; i++) {
-                    GL.Vertex2(new Vector2(p.X + (Radius / 3f) * (float)Math.Cos(i * Math.PI / 8f), p.Y + (Radius / 3f) * (float)Math.Sin(i * Math.PI / 8f)));
+                    GL.Vertex2(new Vector2(P.X + (Radius / 3f) * (float)Math.Cos(i * Math.PI / 8f), P.Y + (Radius / 3f) * (float)Math.Sin(i * Math.PI / 8f)));
                 }
 
                 GL.End();
@@ -143,6 +144,7 @@ namespace TotallyNotSettlersOfCatan {
 
         public void OnClick() {
             clicked = !clicked;
+            Console.WriteLine("Clicked: " + U + " - " + V);
         }
 
     }
