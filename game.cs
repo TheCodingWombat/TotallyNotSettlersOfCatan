@@ -11,7 +11,7 @@ namespace TotallyNotSettlersOfCatan {
 	    // member variables
 	    public Surface screen;
         private GameBoard gameBoard;
-        private int boardSize = 1;
+        private int boardSize = 6;
         public static float tileRadius = 0.5f;
         private OpenTKApp app;
 
@@ -40,7 +40,7 @@ namespace TotallyNotSettlersOfCatan {
         }
 
         private void DetermineZoom() {
-            float tilesInARow = boardSize * 2 + 1;
+            float tilesInARow = boardSize * 2 + 6;
 
             OpenTKApp.Zoom = tilesInARow * Tile.ShortRadius * 1.6f; //De 1.6f moet worden vervangen door aspect ratio
             
