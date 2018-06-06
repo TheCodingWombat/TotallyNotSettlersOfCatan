@@ -22,8 +22,8 @@ namespace TotallyNotSettlersOfCatan {
 			
 			GL.Hint( HintTarget.PerspectiveCorrectionHint, HintMode.Nicest );
             
-			ClientSize = new Size( 640, 400 );
-            Location = new Point(0, 0);
+			ClientSize = new Size( 1280, 800 );
+            Location = new Point(2200, 100);
 			game = new Game(this);
 			game.screen = new Surface( Width, Height );
 			Sprite.target = game.screen;

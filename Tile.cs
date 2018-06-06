@@ -60,10 +60,8 @@ namespace TotallyNotSettlersOfCatan {
 
         private void TranslateToScreenPos() {
             p.X = U * Radius * 1.5f;
-            p.Y = V * Radius * (float)Math.Sqrt(3);
-
-            if ((U&1) == 1)
-                p.Y -= Radius * (float)Math.Sqrt(3) / 2;
+            p.Y = V * Radius * (float)Math.Sqrt(3) + U * Radius * (float)Math.Sqrt(3) / 2;
+            
         }
 
         private Vector3 GetColor() {
@@ -144,7 +142,7 @@ namespace TotallyNotSettlersOfCatan {
 
         public void OnClick() {
             clicked = !clicked;
-            Console.WriteLine("Clicked: " + U + " - " + V);
+            Console.WriteLine("Clicked: " + U + " - " + V + " -||- " + p.X + " - " + p.Y);
         }
 
     }

@@ -27,19 +27,71 @@ namespace TotallyNotSettlersOfCatan {
             CreateCorners();
         }
 
-        public void CheckTileHover(PointF point) {
+        // TODO: This seams cheaty, maybe use z-index.
+
+        public void CheckHover(PointF point) {
+
+            bool objectIsHovered = false;
+
+            // Sides
+            foreach (Side side in sides) {
+                bool contains = side.ContainsPoint(point);
+
+                side.OnHover(contains && !objectIsHovered);
+
+                if (contains)
+                    objectIsHovered = true;
+            }
+
+            // Corners
+            foreach (Corner corner in corners) {
+                bool contains = corner.ContainsPoint(point);
+
+                corner.OnHover(contains && !objectIsHovered);
+
+                if (contains)
+                    objectIsHovered = true;
+            }
+
+            // Tiles
             foreach (Tile tile in tiles) {
-                tile.OnHover(tile.ContainsPoint(point));
+                bool contains = tile.ContainsPoint(point);
+
+                tile.OnHover(contains && !objectIsHovered);
+
+                if (contains)
+                    objectIsHovered = true;
             }
         }
 
-        public void CheckTileClick(PointF point) {
+        public void CheckClick(PointF point) {
+
+            // Sides
+            foreach (Side side in sides) {
+                if (side.ContainsPoint(point)) {
+                    side.OnClick();
+                    return;
+                }
+            }
+
+            // Corners
+            foreach (Corner corner in corners) {
+                if (corner.ContainsPoint(point)) {
+                    corner.OnClick();
+                    return;
+                }
+            }
+
+            // Tiles
             foreach (Tile tile in tiles) {
-                if (tile.ContainsPoint(point))
+                if (tile.ContainsPoint(point)) {
                     tile.OnClick();
+                    return;
+                }
             }
         }
 
+        //FIX axial coordinates
         private void CreateTiles() {
 
             tiles = new List<Tile>();
@@ -49,8 +101,8 @@ namespace TotallyNotSettlersOfCatan {
                 for (int x = -size - 1; x < size + 2; x++) {
 
                     int cubeX = x;
-                    int cubeZ = y - (x + (x & 1)) / 2;
-                    int cubeY = -cubeX - cubeZ;
+                    int cubeY = y;
+                    int cubeZ = -cubeX - cubeY;
 
                     //Inner tiles
                     if (Math.Abs(cubeX) < size && Math.Abs(cubeY) < size && Math.Abs(cubeZ) < size) {
@@ -77,10 +129,7 @@ namespace TotallyNotSettlersOfCatan {
         private void CreateSides() {
 
             sides = new List<Side>();
-
-            foreach (Tile surroundingTile in Joins(1, 0, 0)) {
-                Console.WriteLine(surroundingTile.U + " - " + surroundingTile.V + " - " + surroundingTile.Type);
-            }
+            
             foreach (Tile tile in tiles) {
                 if (tile.Type == -1) continue; //null tile
 
@@ -97,11 +146,49 @@ namespace TotallyNotSettlersOfCatan {
                     }
 
                     if (!isSurroundedByWater) {
-                        Console.WriteLine("CreateSide: " + tile.U + " - " + tile.V + " -O: " + o);
+                        //Console.WriteLine("CreateSide: " + tile.U + " - " + tile.V + " -O: " + o);
                         sides.Add(new Side(tile.P.X, tile.P.Y, o));
                     }
                 }
             }
+        }
+
+        private void CreateCorners() {
+
+            corners = new List<Corner>();
+
+            foreach (Tile tile in tiles) {
+                if (tile.Type == -1) continue; //null tile
+
+                if (CornerSurroundedByWater(tile.U, tile.V, 0))
+                    corners.Add(new Corner(tile.P.X, tile.P.Y, 0));
+
+                if (CornerSurroundedByWater(tile.U, tile.V, 1))
+                    corners.Add(new Corner(tile.P.X, tile.P.Y, 1));
+            }
+
+        }
+
+        public bool CornerSurroundedByWater(int u, int v, int o) {
+            bool surroundedByWater = false;
+
+            foreach (Tile tile in Touches(u, v, o)) {
+                if (tile.Type > 0)
+                    surroundedByWater = true;
+            }
+
+            return surroundedByWater;
+        }
+
+        public Tile[] Touches(int u, int v, int o) {
+            switch (o) {
+                case 0:
+                    return new Tile[] { GetTileAt(u, v), GetTileAt(u - 1, v), GetTileAt(u - 1, v + 1) };
+                case 1:
+                    return new Tile[] { GetTileAt(u + 1, v), GetTileAt(u + 1, v - 1), GetTileAt(u, v) };
+            }
+
+            return null;
         }
 
         public Tile[] Joins(int u, int v, int o) {
@@ -129,17 +216,6 @@ namespace TotallyNotSettlersOfCatan {
             return null;
         }
 
-        private void CreateCorners() {
-
-            corners = new List<Corner>();
-
-            foreach (Tile tile in tiles) {
-                corners.Add(new Corner(tile.P.X, tile.P.Y, 0));
-                corners.Add(new Corner(tile.P.X, tile.P.Y, 1));
-            }
-
-        }
-
         private int RandomType() {
             return random.Next(1, 7);
         }
@@ -157,6 +233,7 @@ namespace TotallyNotSettlersOfCatan {
         }
 
         public void Draw() {
+
             foreach (Side side in sides) {
                 side.Draw();
             }
@@ -168,7 +245,6 @@ namespace TotallyNotSettlersOfCatan {
             foreach (Tile tile in tiles) {
                 tile.Draw();
             }
-
         }
 
     }
