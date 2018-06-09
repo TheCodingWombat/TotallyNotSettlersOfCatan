@@ -142,8 +142,5 @@ namespace TotallyNotSettlersOfCatan {
         }
 
         //Terminology from http://www-cs-students.stanford.edu/~amitp/game-programming/grids/#relationships
-
-
-
     }
 }

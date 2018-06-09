@@ -58,13 +58,22 @@ namespace TotallyNotSettlersOfCatan {
 		}
 		protected override void OnResize( EventArgs e )
 		{
+            DetermineZoom();
 			// called upon window resize
 			GL.Viewport(0, 0, Width, Height);
 			GL.MatrixMode( MatrixMode.Projection );
 			GL.LoadIdentity();
             GL.Ortho(-1.0 * Zoom, 1.0 * Zoom, (float)Height / Width * -1.0f * Zoom, (float)Height / Width * 1.0f * Zoom, 0.0, 4.0);
         }
-		protected override void OnUpdateFrame( FrameEventArgs e )
+
+        private void DetermineZoom() {
+            float tilesInARow = game.BoardSize * 2 + 1;
+
+            zoom = tilesInARow * Tile.ShortRadius * 1.6f; //De 1.6f moet worden vervangen door aspect ratio
+
+        }
+
+        protected override void OnUpdateFrame( FrameEventArgs e )
 		{
 			// called once per frame; app logic
 			var keyboard = OpenTK.Input.Keyboard.GetState();

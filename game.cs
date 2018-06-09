@@ -11,9 +11,11 @@ namespace TotallyNotSettlersOfCatan {
 	    // member variables
 	    public Surface screen;
         private GameBoard gameBoard;
-        private int boardSize = 3;
+        private int boardSize = 6;
         public static float tileRadius = 0.5f;
         private OpenTKApp app;
+
+        public int BoardSize { get => boardSize; set => boardSize = value; }
 
         public Game(OpenTKApp app) {
             this.app = app;
@@ -22,9 +24,7 @@ namespace TotallyNotSettlersOfCatan {
 	    // initialize
 	    public void Init()
 	    {
-            DetermineZoom();
-            gameBoard = new GameBoard(boardSize);
-
+            gameBoard = new GameBoard(BoardSize);
         }
 
         public void Mouse_Move(PointF point) {
@@ -37,14 +37,7 @@ namespace TotallyNotSettlersOfCatan {
                 
                 gameBoard.CheckClick(point);
             }
-        }
-
-        private void DetermineZoom() {
-            float tilesInARow = boardSize * 2 + 1;
-
-            OpenTKApp.Zoom = tilesInARow * Tile.ShortRadius * 1.6f; //De 1.6f moet worden vervangen door aspect ratio
-            
-        }        
+        }    
 
 	    // tick: renders one frame
 	    public void Tick()

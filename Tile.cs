@@ -17,6 +17,7 @@ namespace TotallyNotSettlersOfCatan {
         private int v;
         private Vector2 p;
         private int type;
+        private int value;
         private Vector2[] vertices = new Vector2[6];
         private Vector3 color;
         private bool hovered = false, clicked = false;
@@ -30,10 +31,11 @@ namespace TotallyNotSettlersOfCatan {
 
         //TODO: Fix coordinate system so it is the same as at https://www.redblobgames.com/grids/hexagons/
 
-        public Tile(int x, int y, int type) {
+        public Tile(int x, int y, int type, int value) {
             this.U = x;
             this.V = y;
             this.Type = type;
+            this.value = value;
 
             color = GetColor();
 
@@ -41,16 +43,6 @@ namespace TotallyNotSettlersOfCatan {
 
             CalculateVertices();
 
-            //CreateRegion();
-
-            //TODO: NOW WORKING ON GETTING SCREEN POSITION
-
-        }
-
-        private void CreateRegion() {
-            using (GraphicsPath gp = new GraphicsPath()) {
-                //gp.AddLines(vertices);
-            }
         }
 
         private void CalculateVertices() {
@@ -142,7 +134,6 @@ namespace TotallyNotSettlersOfCatan {
 
         public void OnClick() {
             clicked = !clicked;
-            Console.WriteLine("Clicked: " + U + " - " + V + " -||- " + p.X + " - " + p.Y);
         }
 
     }
